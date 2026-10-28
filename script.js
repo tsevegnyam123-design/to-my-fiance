@@ -94,3 +94,115 @@ function addFloatingHeart() {
   setTimeout(() => heart.remove(), 17000);
 }
 setInterval(addFloatingHeart, 1600);
+
+// ===== БОЛЗООНЫ УРИЛГА =====
+// Статик сайт тул имэйлийг FormSubmit.co үйлчилгээгээр дамжуулан илгээнэ.
+// Анх удаа илгээхэд INVITE_EMAIL руу баталгаажуулах имэйл очно — "Activate" дарна.
+const INVITE_EMAIL = "tsevegnyam123@gmail.com";
+const INVITE_CC = "munkhbayraminerdene998@gmail.com";
+const WEEKDAYS = ["Ням", "Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба"];
+
+const dateForm = document.getElementById("dateForm");
+const dateStatus = document.getElementById("dateStatus");
+const dateCard = document.getElementById("dateCard");
+let pickedActivity = "";
+
+// Өнгөрсөн өдөр сонгохоос сэргийлнэ
+(function () {
+  const d = new Date(), p = (n) => String(n).padStart(2, "0");
+  document.getElementById("dateDay").min = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+})();
+
+function resetChips() {
+  document.querySelectorAll(".chip-pick").forEach((c) => c.setAttribute("aria-pressed", "false"));
+  pickedActivity = "";
+}
+document.querySelectorAll(".chip-pick").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    const wasOn = chip.getAttribute("aria-pressed") === "true";
+    resetChips();
+    if (!wasOn) { chip.setAttribute("aria-pressed", "true"); pickedActivity = chip.dataset.value; }
+  });
+});
+
+function prettyDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${y} оны ${m}-р сарын ${d}, ${WEEKDAYS[new Date(y, m - 1, d).getDay()]} гараг`;
+}
+
+function setStatus(text, isError) {
+  dateStatus.textContent = text;
+  dateStatus.className = "date-status" + (isError ? " err" : "");
+}
+
+function showInviteCard(details) {
+  dateCard.replaceChildren();
+  const h = document.createElement("h3");
+  h.textContent = "Урилга илгээгдлээ 💌";
+  const dl = document.createElement("dl");
+  Object.entries(details).forEach(([k, v]) => {
+    const dt = document.createElement("dt"); dt.textContent = k;
+    const dd = document.createElement("dd"); dd.textContent = v;
+    dl.append(dt, dd);
+  });
+  dateCard.append(h, dl);
+  dateCard.classList.remove("hidden");
+  dateCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function showMailtoFallback(details, subject) {
+  const body = Object.entries(details).map(([k, v]) => `${k}: ${v}`).join("\n");
+  const a = document.createElement("a");
+  a.href = `mailto:${INVITE_EMAIL},${INVITE_CC}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  a.textContent = "имэйл апп-аараа илгээх";
+  dateStatus.className = "date-status err";
+  dateStatus.replaceChildren("Автоматаар илгээж чадсангүй. Энд дарж ", a, " ♡");
+}
+
+dateForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const f = new FormData(dateForm);
+  if (f.get("_honey")) return; // спам
+
+  const inviter = f.get("inviter");
+  const day = f.get("day");
+  const time = f.get("time");
+  const place = (f.get("place") || "").trim();
+  const note = (f.get("note") || "").trim();
+
+  if (!inviter || !day || !time || !place) {
+    setStatus("Хэн урьж байгаа, өдөр, цаг, байршлаа бүгдийг нь сонгоорой ♡", true);
+    return;
+  }
+
+  const details = {
+    "Урьсан хүн": inviter,
+    "Өдөр": prettyDate(day),
+    "Цаг": time,
+    "Байршил": place,
+    "Юу хийх вэ": pickedActivity || "—",
+    "Нэмэлт үг": note || "—"
+  };
+  const subject = `💌 Болзооны урилга — ${inviter}`;
+  const btn = dateForm.querySelector("button[type=submit]");
+  btn.disabled = true;
+  setStatus("Илгээж байна… ♡", false);
+
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${INVITE_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ ...details, _subject: subject, _cc: INVITE_CC, _template: "table", _captcha: "false" })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.success === false || data.success === "false") throw new Error("send failed");
+    setStatus("Урилга хоёр имэйл рүү очлоо ♡", false);
+    showInviteCard(details);
+    dateForm.reset();
+    resetChips();
+  } catch (err) {
+    showMailtoFallback(details, subject);
+  } finally {
+    btn.disabled = false;
+  }
+});
