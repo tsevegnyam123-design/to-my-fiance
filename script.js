@@ -7,8 +7,8 @@
   АНХААР: GitHub Pages статик сайт тул SECRET_CODE нь жинхэнэ хамгаалалт биш.
   Код JavaScript дотор харагдаж болох тул хувийн мэдээлэл бүү байрлуулаарай.
 */
-const SECRET_CODE = "huurhnuu2026";
-const RELATIONSHIP_START = "2026-01-01"; // ӨӨРСДИЙН ЭХЭЛСЭН ӨДРӨӨР СОЛИНО
+const SECRET_CODE = "0722";
+const RELATIONSHIP_START = "2026-08-29"; // ӨӨРСДИЙН ЭХЭЛСЭН ӨДРӨӨР СОЛИНО
 
 const lockScreen = document.getElementById("lockScreen");
 const siteContent = document.getElementById("siteContent");
