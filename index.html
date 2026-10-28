@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff0f6">
+  <meta name="description" content="jookhno-оос huurhnuu-д зориулсан жижигхэн дурсамжийн ертөнц.">
+  <title>for huurhnuu ♡</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" aria-hidden="true"></div>
+  <main>
+    <section id="lockScreen" class="lock-screen">
+      <div class="lock-card paper">
+        <div class="sticker">♡ made with love ♡</div>
+        <div class="tiny-bow">୨୧</div>
+        <p class="eyebrow">a little place just for you</p>
+        <h1>hi, huurhnuu <span>♡</span></h1>
+        <p class="intro">jookhno чамд зориулж нэг жижигхэн ертөнц бэлдлээ.</p>
+        <p class="hint">Бидний нууц кодыг оруулаад дотогш ороорой.</p>
+        <form id="unlockForm">
+          <label class="sr-only" for="secretCode">Нууц код</label>
+          <input id="secretCode" type="password" placeholder="Нууц код..." autocomplete="off" required>
+          <button type="submit" class="primary-btn">Нээх ♡</button>
+          <p id="lockMessage" class="message" aria-live="polite"></p>
+        </form>
+        <div class="doodle">✿　♡　✿</div>
+      </div>
+      <p class="footer-note">a tiny website made by jookhno</p>
+    </section>
+
+    <section id="siteContent" class="hidden">
+      <header class="hero paper">
+        <span class="tape tape-left"></span><span class="tape tape-right"></span>
+        <p class="eyebrow">our little scrapbook</p>
+        <h1>jookhno <span class="heart">♡</span> huurhnuu</h1>
+        <p class="hero-subtitle">Чамтай холбоотой жижигхэн зүйлс хүртэл надад үнэ цэнтэй.</p>
+        <div class="flower-row" aria-hidden="true">🌷　🎀　🌸　🎀　🌷</div>
+        <a class="scroll-link" href="#letter">доошоо үзээрэй ↓</a>
+      </header>
+
+      <nav class="nav-chips" aria-label="Хэсгүүд">
+        <a href="#letter">Захиа</a><a href="#memories">Дурсамж</a><a href="#playlist">Хөгжим</a><a href="#surprises">Сюрприз</a><a href="#timer">Тоолуур</a>
+      </nav>
+
+      <section id="letter" class="section paper letter-section">
+        <span class="corner-flower">✿</span>
+        <p class="eyebrow">open when you need a little love</p>
+        <h2>huurhnuu-д бичсэн захиа 💌</h2>
+        <div class="letter-body">
+          <p>Сайн уу, huurhnuu минь. ♡</p>
+          <p>Энэ жижигхэн сайтыг чамд зориулж хийлээ. Энд байгаа өнгө, зураг, үг бүрийг харахдаа чамайг бодсон гэдгийг мэдээсэй гэж хүссэн юм.</p>
+          <p>Чамтай өнгөрүүлдэг мөчүүд надад онцгой. Заримдаа том зүйл хэлэхээс илүүтэй, “чи миний хувьд үнэ цэнтэй хүн шүү” гэдгийг л сануулахыг хүсдэг.</p>
+          <p>Өдөр чинь хэцүү байсан ч энд ирээд жаахан инээмсэглээсэй. Энэ бол чамд зориулсан бидний жижигхэн булан.</p>
+          <p class="signature">Үргэлж чамайг боддог,<br><span>jookhno ♡</span></p>
+        </div>
+        <button class="soft-btn" id="letterBtn">Захианы жижигхэн нууц ✨</button>
+        <p id="letterSecret" class="hidden secret-note">Чи энэ сайтыг нээсэн шигээ, миний өдрүүдэд ч бас гэрэл нэмдэг шүү. ♡</p>
+      </section>
+
+      <section id="memories" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">little moments, big feelings</p>
+          <h2>Бидний дурсамжийн булан 📷</h2>
+          <p>Доорх зурагнуудыг өөрсдийн зургаар сольж болно.</p>
+        </div>
+        <div class="memory-grid">
+          <article class="memory-card paper tilt-left">
+            <div class="photo-frame"><img src="assets/photos/photo1.jpg" alt="Дурсамжийн зураг 1" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-placeholder">♡<small>photo 1</small></div></div>
+            <p class="memory-caption">“Энд бидний дуртай зураг байна.”</p>
+            <span class="date-label">our moment</span>
+          </article>
+          <article class="memory-card paper tilt-right">
+            <div class="photo-frame"><img src="assets/photos/photo2.jpg" alt="Дурсамжийн зураг 2" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-placeholder">✿<small>photo 2</small></div></div>
+            <p class="memory-caption">“Энгийн өдөр ч чамтай бол онцгой.”</p>
+            <span class="date-label">favorite memory</span>
+          </article>
+          <article class="memory-card paper tilt-left">
+            <div class="photo-frame"><img src="assets/photos/photo3.jpg" alt="Дурсамжийн зураг 3" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-placeholder">🎀<small>photo 3</small></div></div>
+            <p class="memory-caption">“Дахиад олон гоё дурсамж бүтээе.”</p>
+            <span class="date-label">to be continued</span>
+          </article>
+        </div>
+        <p class="small-note">Зураг нэмэх заавар ZIP доторх README файлд бий.</p>
+      </section>
+
+      <section id="playlist" class="section paper music-section">
+        <p class="eyebrow">songs that remind me of you</p>
+        <h2>Бидний playlist 🎧</h2>
+        <p>Дуртай дууныхаа холбоосыг доорх товчид оруулж болно. Жишээ холбоосыг код дотор сольж тохируулна.</p>
+        <div class="song-list">
+          <a class="song-card" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span class="vinyl">♫</span><span><b>our song #1</b><small>Энд дууны нэрээ бичээрэй</small></span><span>↗</span></a>
+          <a class="song-card" href="https://music.youtube.com/" target="_blank" rel="noopener noreferrer"><span class="vinyl">♪</span><span><b>our song #2</b><small>Энд өөр нэг дуу нэмээрэй</small></span><span>↗</span></a>
+          <a class="song-card" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span class="vinyl">♫</span><span><b>our song #3</b><small>Та хоёрын дурсамжтай дуу</small></span><span>↗</span></a>
+        </div>
+        <p class="small-note">Дуу автоматаар тоглохгүй — товчийг дарж тухайн хөгжмийн апп дээр нээнэ.</p>
+      </section>
+
+      <section id="surprises" class="section surprise-section">
+        <div class="section-heading">
+          <p class="eyebrow">tiny gifts for you</p>
+          <h2>Жижигхэн сюрпризүүд 🎁</h2>
+          <p>Нэг нэгээр нь дараад үзээрэй.</p>
+        </div>
+        <div class="gift-grid">
+          <button class="gift-card paper" data-message="Өнөөдөр өөртөө зөөлөн хандаарай. Чи хангалттай сайн байгаа шүү. ♡"><span>🎁</span><b>Нээх бэлэг 1</b><small>Чамд хэлэх үг</small></button>
+          <button class="gift-card paper" data-message="Боломжтой бол одоо жаахан амраад, дуртай зүйлээ хийгээрэй. Чиний инээмсэглэл үнэ цэнтэй. 🌷"><span>🎀</span><b>Нээх бэлэг 2</b><small>Өдрийн сануулга</small></button>
+          <button class="gift-card paper" data-message="Миний хамгийн дуртай төлөвлөгөөний нэг бол чамтай хамт дахин гоё дурсамж бүтээх. 💗"><span>💌</span><b>Нээх бэлэг 3</b><small>Ирээдүйн хүсэл</small></button>
+        </div>
+        <div id="giftMessage" class="gift-message hidden" role="status"></div>
+      </section>
+
+      <section id="timer" class="section paper timer-section">
+        <p class="eyebrow">every second is a little memory</p>
+        <h2>Бидний хамт байсан хугацаа ⏳</h2>
+        <p class="timer-sub">Эхэлсэн өдрөө <code>script.js</code> файлаас өөрчлөөрэй.</p>
+        <div class="timer-grid">
+          <div><strong id="days">—</strong><span>өдөр</span></div>
+          <div><strong id="hours">—</strong><span>цаг</span></div>
+          <div><strong id="minutes">—</strong><span>минут</span></div>
+          <div><strong id="seconds">—</strong><span>секунд</span></div>
+        </div>
+        <p id="timerCaption" class="timer-caption">Түүх маань өдөр бүр үргэлжилсээр… ♡</p>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-hearts">♡ ♡ ♡</div>
+        <p>made with love by <b>jookhno</b> for <b>huurhnuu</b></p>
+        <p class="small-note">Бидний жижигхэн ертөнц. 🌷</p>
+        <button id="backToTop" class="text-btn">Эхлэл рүү ↑</button>
+      </footer>
+    </section>
+  </main>
+
+  <dialog id="giftDialog" class="gift-dialog">
+    <div class="dialog-paper paper"><button id="closeDialog" class="close-btn" aria-label="Хаах">×</button><div class="dialog-flower">🌷</div><p class="eyebrow">a little note for you</p><p id="dialogText"></p><button id="dialogOkay" class="primary-btn">Хөөрхөн юм аа ♡</button></div>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
