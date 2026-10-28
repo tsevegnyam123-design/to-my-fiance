@@ -7,7 +7,7 @@
   АНХААР: GitHub Pages статик сайт тул SECRET_CODE нь жинхэнэ хамгаалалт биш.
   Код JavaScript дотор харагдаж болох тул хувийн мэдээлэл бүү байрлуулаарай.
 */
-const SECRET_CODE = "0722";
+const SECRET_CODE = "0017";
 const RELATIONSHIP_START = "2026-08-29"; // ӨӨРСДИЙН ЭХЭЛСЭН ӨДРӨӨР СОЛИНО
 
 const lockScreen = document.getElementById("lockScreen");
@@ -63,7 +63,7 @@ function updateTimer() {
   const now = new Date();
   if (!parts.every(Number.isFinite) || Number.isNaN(start.getTime()) || start > now) {
     ["days", "hours", "minutes", "seconds"].forEach(id => document.getElementById(id).textContent = "—");
-    document.getElementById("timerCaption").textContent = "script.js дотор эхэлсэн өдрөө зөв оруулаарай ♡";
+    document.getElementById("timerCaption").textContent = "♡";
     return;
   }
   let total = Math.floor((now - start) / 1000);
