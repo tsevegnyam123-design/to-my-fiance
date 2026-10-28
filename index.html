@@ -41,7 +41,7 @@
       </header>
 
       <nav class="nav-chips" aria-label="Хэсгүүд">
-        <a href="#letter">Захиа</a><a href="#memories">Дурсамж</a><a href="#playlist">Хөгжим</a><a href="#surprises">Сюрприз</a><a href="#timer">Тоолуур</a>
+        <a href="#letter">Захиа</a><a href="#memories">Дурсамж</a><a href="#playlist">Хөгжим</a><a href="#surprises">Сюрприз</a><a href="#date">Болзоо</a><a href="#timer">Тоолуур</a>
       </nav>
 
       <section id="letter" class="section paper letter-section">
@@ -109,6 +109,48 @@
           <button class="gift-card paper" data-message="Миний хамгийн дуртай төлөвлөгөөний нэг бол чамтай хамт дахин гоё дурсамж бүтээх. 💗"><span>💌</span><b>Нээх бэлэг 3</b><small>Ирээдүйн хүсэл</small></button>
         </div>
         <div id="giftMessage" class="gift-message hidden" role="status"></div>
+      </section>
+
+      <section id="date" class="section paper date-section">
+        <span class="corner-flower">🌸</span>
+        <p class="eyebrow">will you go out with me?</p>
+        <h2>Болзоонд урих 💌</h2>
+        <p class="date-sub">Болзоог санаачилсан хүн өдөр, цаг, газраа өөрөө сонгоно. Илгээмэгц урилга хоёулангийнх нь имэйл рүү очно.</p>
+        <form id="dateForm" novalidate>
+          <fieldset>
+            <legend class="field-label">Хэн урьж байна вэ?</legend>
+            <div class="who-row">
+              <label class="who-opt"><input type="radio" name="inviter" value="jookhno"><span>jookhno</span></label>
+              <label class="who-opt"><input type="radio" name="inviter" value="Amina (huurhnuu)"><span>Amina</span></label>
+            </div>
+          </fieldset>
+          <div class="date-row">
+            <div><label class="field-label" for="dateDay">Өдөр</label><input id="dateDay" name="day" type="date" required></div>
+            <div><label class="field-label" for="dateTime">Цаг</label><input id="dateTime" name="time" type="time" required></div>
+          </div>
+          <div>
+            <label class="field-label" for="datePlace">Байршил</label>
+            <input id="datePlace" name="place" type="text" maxlength="120" placeholder="Жишээ: Нарантуул, Zaluu кафе..." required>
+          </div>
+          <div>
+            <span class="field-label">Юу хийх вэ? (заавал биш)</span>
+            <div class="chip-row">
+              <button type="button" class="chip-pick" aria-pressed="false" data-value="Кафе ☕">Кафе ☕</button>
+              <button type="button" class="chip-pick" aria-pressed="false" data-value="Кино 🎬">Кино 🎬</button>
+              <button type="button" class="chip-pick" aria-pressed="false" data-value="Оройн хоол 🍝">Оройн хоол 🍝</button>
+              <button type="button" class="chip-pick" aria-pressed="false" data-value="Зугаалга 🌳">Зугаалга 🌳</button>
+              <button type="button" class="chip-pick" aria-pressed="false" data-value="Гэнэтийн төлөвлөгөө ✨">Гэнэтийн ✨</button>
+            </div>
+          </div>
+          <div>
+            <label class="field-label" for="dateNote">Нэмэлт үг (заавал биш)</label>
+            <textarea id="dateNote" name="note" rows="3" maxlength="400" placeholder="Жижигхэн мессеж үлдээгээрэй ♡"></textarea>
+          </div>
+          <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="primary-btn">Урилга илгээх 💌</button>
+          <p id="dateStatus" class="date-status" aria-live="polite"></p>
+        </form>
+        <div id="dateCard" class="invite-card hidden"></div>
       </section>
 
       <section id="timer" class="section paper timer-section">
