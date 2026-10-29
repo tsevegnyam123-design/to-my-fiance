@@ -189,13 +189,7 @@ dateForm.addEventListener("submit", async (event) => {
   setStatus("Илгээж байна… ♡", false);
 
   try {
-    const res = await fetch(`https://formsubmit.co/ajax/${INVITE_EMAIL}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ ...details, _subject: subject, _cc: INVITE_CC, _template: "table", _captcha: "false" })
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || data.success === false || data.success === "false") throw new Error("send failed");
+    await sendInvite(details, subject);
     setStatus("Урилга хоёр имэйл рүү очлоо ♡", false);
     showInviteCard(details);
     dateForm.reset();
@@ -206,3 +200,160 @@ dateForm.addEventListener("submit", async (event) => {
     btn.disabled = false;
   }
 });
+
+// ===== УРИЛГЫН ИМЭЙЛ ИЛГЭЭХ =====
+// Загварлаг имэйл: emailjs.com дээр email-template.html-ийг ашиглаад доорх 3 утгыг бөглө.
+// Хоосон бол FormSubmit-ийн "box" загвараар илгээнэ.
+const EMAILJS = { publicKey: "", serviceId: "", templateId: "" };
+
+async function sendInvite(details, subject) {
+  if (EMAILJS.publicKey && EMAILJS.serviceId && EMAILJS.templateId) {
+    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: EMAILJS.serviceId,
+        template_id: EMAILJS.templateId,
+        user_id: EMAILJS.publicKey,
+        template_params: {
+          to_email: INVITE_EMAIL, cc_email: INVITE_CC, subject,
+          inviter: details["Урьсан хүн"], date: details["Өдөр"], time: details["Цаг"],
+          place: details["Байршил"], activity: details["Юу хийх вэ"], note: details["Нэмэлт үг"]
+        }
+      })
+    });
+    if (!res.ok) throw new Error("emailjs failed");
+    return;
+  }
+  const res = await fetch(`https://formsubmit.co/ajax/${INVITE_EMAIL}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({ ...details, _subject: subject, _cc: INVITE_CC, _template: "box", _captcha: "false" })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.success === false || data.success === "false") throw new Error("send failed");
+}
+
+// ===== ДУРСАМЖИЙН ГАЛЕРЕЙ (Supabase) =====
+// setup-supabase.sql-ийг нэг удаа ажиллуулаад доорх хоёр утгыг бөглө.
+const SUPABASE_URL = "";  // жишээ: https://abcd1234.supabase.co
+const SUPABASE_KEY = "";  // Project Settings → API → anon public key
+
+const memForm = document.getElementById("memForm");
+const memFile = document.getElementById("memFile");
+const memPreview = document.getElementById("memPreview");
+const memStatus = document.getElementById("memStatus");
+const memGallery = document.getElementById("memGallery");
+const sbReady = () => Boolean(SUPABASE_URL && SUPABASE_KEY);
+const sb = (path, opts = {}) => fetch(SUPABASE_URL + path, {
+  ...opts,
+  headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, ...(opts.headers || {}) }
+});
+
+(function () {
+  const d = new Date(), p = (n) => String(n).padStart(2, "0");
+  document.getElementById("memDay").max = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+})();
+
+function setMem(text, isError) {
+  memStatus.textContent = text;
+  memStatus.className = "date-status" + (isError ? " err" : "");
+}
+
+function galleryNote(text) {
+  const p = document.createElement("p");
+  p.className = "small-note";
+  p.textContent = text;
+  memGallery.replaceChildren(p);
+}
+
+memFile.addEventListener("change", () => {
+  const f = memFile.files[0];
+  if (!f) { memPreview.hidden = true; return; }
+  memPreview.src = URL.createObjectURL(f);
+  memPreview.hidden = false;
+});
+
+// Утасны том зургийг жижигрүүлж (1600px) илгээнэ
+async function resizeImage(file, max = 1600) {
+  const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+  const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas");
+  c.width = Math.round(bmp.width * k);
+  c.height = Math.round(bmp.height * k);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  return new Promise((resolve) => c.toBlob(resolve, "image/jpeg", 0.82));
+}
+
+function memCard(m, i) {
+  const art = document.createElement("article");
+  art.className = `memory-card paper ${i % 2 ? "tilt-right" : "tilt-left"}`;
+  const frame = document.createElement("div");
+  frame.className = "photo-frame";
+  const img = document.createElement("img");
+  img.src = `${SUPABASE_URL}/storage/v1/object/public/memories/${m.image_path}`;
+  img.alt = m.caption || "Дурсамж";
+  img.loading = "lazy";
+  frame.append(img);
+  const cap = document.createElement("p");
+  cap.className = "memory-caption";
+  cap.textContent = `“${m.caption || ""}”`;
+  const label = document.createElement("span");
+  label.className = "date-label";
+  label.textContent = [m.taken_on ? prettyDate(m.taken_on) : "", m.place].filter(Boolean).join(" · ");
+  const meta = document.createElement("span");
+  meta.className = "memory-meta";
+  meta.textContent = m.author ? `${m.author} нэмсэн ♡` : "";
+  art.append(frame, cap, label, meta);
+  return art;
+}
+
+async function loadMemories() {
+  if (!sbReady()) { galleryNote("Галерей тохируулагдаагүй байна (script.js дотор SUPABASE_URL, SUPABASE_KEY бөглөнө)."); return; }
+  try {
+    const res = await sb("/rest/v1/memories?select=*&order=taken_on.desc.nullslast,created_at.desc");
+    if (!res.ok) throw new Error("load");
+    const rows = await res.json();
+    if (!rows.length) { galleryNote("Анхны дурсамжаа дээрх хэсгээс нэмээрэй ♡"); return; }
+    memGallery.replaceChildren(...rows.map(memCard));
+  } catch (err) {
+    galleryNote("Дурсамжийг ачаалж чадсангүй.");
+  }
+}
+
+memForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!sbReady()) { setMem("Эхлээд Supabase тохиргоогоо хийнэ үү (script.js).", true); return; }
+  const f = new FormData(memForm), file = memFile.files[0];
+  const who = f.get("who"), day = f.get("day");
+  const place = (f.get("place") || "").trim(), text = (f.get("text") || "").trim();
+  if (!file || !who || !day || !place || !text) {
+    setMem("Зураг, өдөр, газар, юу болсон, хэн нэмж байгаагаа бөглөөрэй ♡", true);
+    return;
+  }
+  const btn = memForm.querySelector("button[type=submit]");
+  btn.disabled = true;
+  setMem("Зургийг илгээж байна… ♡", false);
+  try {
+    const blob = await resizeImage(file);
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
+    let r = await sb(`/storage/v1/object/memories/${path}`, { method: "POST", headers: { "Content-Type": "image/jpeg" }, body: blob });
+    if (!r.ok) throw new Error("upload");
+    r = await sb("/rest/v1/memories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ taken_on: day, place, caption: text, author: who, image_path: path })
+    });
+    if (!r.ok) throw new Error("insert");
+    memForm.reset();
+    memPreview.hidden = true;
+    setMem("Дурсамж нэмэгдлээ ♡", false);
+    await loadMemories();
+  } catch (err) {
+    setMem("Илгээж чадсангүй. Тохиргоо болон интернэтээ шалгаад дахин оролдоорой.", true);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+loadMemories();

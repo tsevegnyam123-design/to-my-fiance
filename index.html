@@ -63,7 +63,6 @@
         <div class="section-heading">
           <p class="eyebrow">little moments, big feelings</p>
           <h2>Бидний дурсамжийн булан 📷</h2>
-          <p>zurag solih.</p>
         </div>
         <div class="memory-grid">
           <article class="memory-card paper tilt-left">
@@ -82,7 +81,35 @@
             <span class="date-label">to be continued</span>
           </article>
         </div>
-        <p class="small-note">ZURAG ORUULNA.</p>
+        <div class="paper mem-add">
+          <p class="eyebrow">add a new memory</p>
+          <h3 class="mem-title">Шинэ дурсамж нэмэх 📸</h3>
+          <form id="memForm" novalidate>
+            <fieldset>
+              <legend class="field-label">Хэн нэмж байна вэ?</legend>
+              <div class="who-row">
+                <label class="who-opt"><input type="radio" name="who" value="jookhno"><span>jookhno</span></label>
+                <label class="who-opt"><input type="radio" name="who" value="Amina"><span>Amina</span></label>
+              </div>
+            </fieldset>
+            <div>
+              <label class="field-label" for="memFile">Зураг (утаснаасаа сонгоно)</label>
+              <input id="memFile" name="photo" type="file" accept="image/*">
+              <img id="memPreview" class="mem-preview" alt="Сонгосон зураг" hidden>
+            </div>
+            <div class="date-row">
+              <div><label class="field-label" for="memDay">Хэдний өдөр</label><input id="memDay" name="day" type="date" required></div>
+              <div><label class="field-label" for="memPlace">Хаана</label><input id="memPlace" name="place" type="text" maxlength="80" placeholder="Жишээ: Сүхбаатарын талбай" required></div>
+            </div>
+            <div>
+              <label class="field-label" for="memText">Юу болсон бэ?</label>
+              <textarea id="memText" name="text" rows="3" maxlength="300" placeholder="Тэр өдөр юу болсон, юу мэдэрснээ бичээрэй ♡" required></textarea>
+            </div>
+            <button type="submit" class="primary-btn">Дурсамж хадгалах 💗</button>
+            <p id="memStatus" class="date-status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div id="memGallery" class="memory-grid mem-gallery"></div>
       </section>
 
       <section id="playlist" class="section paper music-section">
