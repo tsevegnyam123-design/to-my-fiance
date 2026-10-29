@@ -41,7 +41,7 @@
       </header>
 
       <nav class="nav-chips" aria-label="Хэсгүүд">
-        <a href="#letter">Захиа</a><a href="#memories">Дурсамж</a><a href="#playlist">Хөгжим</a><a href="#surprises">Сюрприз</a><a href="#date">Болзоо</a><a href="#timer">Тоолуур</a>
+        <a href="#letter">Захиа</a><a href="#memories">Дурсамж</a><a href="#playlist">Хөгжим</a><a href="#surprises">Сюрприз</a><a href="#story">Түүх</a><a href="#reasons">Шалтгаан</a><a href="#openwhen">Дугтуй</a><a href="#lists">Жагсаалт</a><a href="#mood">Сэтгэл</a><a href="#date">Болзоо</a><a href="#timer">Тоолуур</a>
       </nav>
 
       <section id="letter" class="section paper letter-section">
@@ -138,6 +138,53 @@
         <div id="giftMessage" class="gift-message hidden" role="status"></div>
       </section>
 
+      <section id="story" class="section paper story-section">
+        <p class="eyebrow">our story</p>
+        <h2>Бидний түүх 🕰️</h2>
+        <div id="timelineBox" class="timeline"></div>
+        <form id="timelineForm" class="mini-form"></form>
+      </section>
+
+      <section id="reasons" class="section paper center-section">
+        <p class="eyebrow">reasons i love you</p>
+        <h2>Чамайг хайрладаг шалтгаанууд 💗</h2>
+        <div class="reason-box"><p id="reasonText">Товчийг дарж нэг шалтгааныг нээгээрэй ♡</p><small id="reasonNum"></small></div>
+        <button id="reasonBtn" class="primary-btn" type="button">Нэг шалтгаан нээх ✨</button>
+      </section>
+
+      <section id="openwhen" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">open when…</p>
+          <h2>Нээх захианууд 💌</h2>
+          <p>Тохирох үед нь нэг нэгээр нь нээгээрэй.</p>
+        </div>
+        <div id="lettersBox" class="gift-grid"></div>
+      </section>
+
+      <section id="lists" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">things we want to do</p>
+          <h2>Хамтдаа жагсаалт ✅</h2>
+        </div>
+        <div class="two-col">
+          <div class="paper list-card"><h3>Хамтдаа хийх зүйлс</h3><form id="bucketForm" class="mini-form"></form><div id="bucketBox" class="todo-list"></div></div>
+          <div class="paper list-card"><h3>Очих газрууд 📍</h3><form id="placeForm" class="mini-form"></form><div id="placeBox" class="todo-list"></div></div>
+        </div>
+      </section>
+
+      <section id="mood" class="section paper center-section">
+        <p class="eyebrow">how are you today?</p>
+        <h2>Өнөөдрийн сэтгэл 🌤️</h2>
+        <div class="who-row mood-who">
+          <label class="who-opt"><input type="radio" name="moodWho" value="jookhno"><span>jookhno</span></label>
+          <label class="who-opt"><input type="radio" name="moodWho" value="Amina"><span>Amina</span></label>
+        </div>
+        <div id="moodPick" class="mood-pick"></div>
+        <p id="moodStatus" class="date-status" aria-live="polite"></p>
+        <div id="moodToday" class="mood-today"></div>
+        <div id="moodHistory" class="mood-history"></div>
+      </section>
+
       <section id="date" class="section paper date-section">
         <span class="corner-flower">🌸</span>
         <p class="eyebrow">will you go out with me?</p>
@@ -190,6 +237,7 @@
           <div><strong id="minutes">—</strong><span>минут</span></div>
           <div><strong id="seconds">—</strong><span>секунд</span></div>
         </div>
+        <div id="specialDays" class="special-grid"></div>
         <p id="timerCaption" class="timer-caption">Түүх маань өдөр бүр үргэлжилсээр… ♡</p>
       </section>
 
