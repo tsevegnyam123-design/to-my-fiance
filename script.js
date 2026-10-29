@@ -1,359 +1,94 @@
-/*
-  ТОХИРУУЛАХ ХЭСЭГ:
-  1) SECRET_CODE: нууц кодоо энд өөрчил.
-  2) RELATIONSHIP_START: хамт үерхэж эхэлсэн огноогоо YYYY-MM-DD форматаар бич.
-  3) Хөгжмийн нэр, холбоос болон захианы үгийг index.html файлаас өөрчил.
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--pink:#f5b8d0;--deep:#a84e77;--rose:#d979a0;--pale:#fff0f6;--cream:#fffaf7;--ink:#5e3c4b;--muted:#9c7184;--line:#f0d4e0;--shadow:0 14px 40px #a64e7714}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:radial-gradient(circle at 15% 8%,#ffe1ed 0,transparent 25%),radial-gradient(circle at 90% 30%,#ffeaf2 0,transparent 24%),#fff8fb;color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.65}a{color:inherit}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}main{width:min(100% - 28px,980px);margin:0 auto}.paper{background:#fffdfb;border:1px solid #f3dbe5;box-shadow:var(--shadow);position:relative;border-radius:8px;background-image:radial-gradient(#e8b9ca55 .7px,transparent .7px);background-size:12px 12px}.lock-screen{min-height:100svh;display:grid;place-items:center;padding:32px 0}.lock-card{width:min(100%,480px);padding:42px 30px 28px;text-align:center;transform:rotate(-.5deg)}.sticker{display:inline-block;background:#ffe0eb;border:1px dashed #d98ba9;border-radius:999px;padding:4px 13px;font-size:.75rem;color:var(--deep);letter-spacing:.08em}.tiny-bow{font-size:3rem;color:#d979a0;line-height:1.4;margin-top:8px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;font-weight:700;color:var(--rose);margin:0 0 8px}h1,h2{font-family:'Playfair Display',Georgia,serif;line-height:1.2;font-weight:600}h1{font-size:clamp(2.1rem,7vw,3.2rem);margin:8px 0 14px}h1 span,.heart{color:#d979a0}.intro{font-size:1.05rem}.hint{font-size:.9rem;color:var(--muted);margin-top:24px}#unlockForm{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}input[type=password]{flex:1;min-width:160px;padding:12px 14px;border:1px solid #ecc9d8;border-radius:12px;background:#fff9fc;outline:none;color:var(--ink)}input:focus{border-color:var(--rose);box-shadow:0 0 0 3px #f5b8d044}.primary-btn,.soft-btn{border:0;border-radius:12px;padding:12px 18px;background:var(--deep);color:white;font-weight:700;box-shadow:0 5px 0 #80395620;transition:transform .18s,background .18s}.primary-btn:hover,.soft-btn:hover{transform:translateY(-2px);background:#943e66}.message{width:100%;margin:0;color:#b34367;font-size:.86rem}.doodle{color:#d979a0;letter-spacing:.5em;margin-top:25px}.footer-note{font-size:.75rem;color:#b58b9e;margin:16px}.hero{margin:34px auto 22px;text-align:center;padding:55px 22px 38px;overflow:hidden}.tape{position:absolute;top:12px;width:90px;height:24px;background:#f6c5d8aa;transform:rotate(-12deg)}.tape-left{left:18px}.tape-right{right:18px;transform:rotate(12deg)}.hero h1{font-size:clamp(2.2rem,8vw,4.5rem)}.hero-subtitle{max-width:500px;margin:0 auto;color:var(--muted)}.flower-row{font-size:1.55rem;margin:20px 0}.scroll-link{display:inline-block;color:var(--deep);text-decoration:none;font-weight:700;font-size:.88rem}.nav-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 40px}.nav-chips a{padding:8px 14px;border:1px solid #f0ccdb;background:#fff9fc;border-radius:999px;text-decoration:none;font-size:.84rem;color:var(--deep);transition:background .2s}.nav-chips a:hover{background:#ffe1ed}.section{margin:38px 0;padding:clamp(24px,5vw,44px)}.section h2{font-size:clamp(1.65rem,5vw,2.4rem);margin:0 0 15px}.letter-section{max-width:760px;margin-inline:auto}.corner-flower{position:absolute;right:20px;top:15px;color:#e5a0bc;font-size:2rem}.letter-body{font-family:Georgia,serif;font-size:1.04rem;line-height:1.9;border-left:2px solid #f2c7d8;padding-left:20px;margin:25px 0}.signature{color:var(--deep);text-align:right}.signature span{font-family:'Playfair Display',serif;font-size:1.4rem}.secret-note{background:#fff0f6;padding:14px;border-radius:12px;margin-bottom:0;color:var(--deep)}.section-heading{text-align:center;margin:0 auto 22px}.section-heading p:last-child{color:var(--muted);font-size:.9rem}.memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.memory-card{padding:13px 13px 20px;text-align:center}.tilt-left{transform:rotate(-1.4deg)}.tilt-right{transform:rotate(1.5deg)}.photo-frame{height:230px;padding:8px;background:white;border:1px solid #f3e5eb;position:relative}.photo-frame img{width:100%;height:100%;object-fit:cover}.photo-placeholder{display:none;height:100%;place-items:center;align-content:center;background:linear-gradient(145deg,#ffe5ef,#fff8fb);font-size:2.5rem;color:#d979a0}.photo-placeholder small{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}.memory-caption{font-family:Georgia,serif;font-size:.94rem;margin:15px 0 4px}.date-label{font-size:.67rem;text-transform:uppercase;letter-spacing:.12em;color:#c18ba2}.small-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:18px}.music-section{max-width:760px;margin-inline:auto}.music-section>p:not(.eyebrow){color:var(--muted);font-size:.9rem}.song-list{display:grid;gap:10px;margin-top:22px}.song-card{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid #f0d5e1;border-radius:14px;background:#fff9fc;text-decoration:none}.song-card>span:nth-child(2){flex:1;display:grid}.song-card small{color:var(--muted);font-size:.78rem}.vinyl{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#f9d7e5 0 12%,#b35a80 13% 19%,#edb5cb 20% 100%);color:#fff;font-size:1.2rem}.gift-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.gift-card{display:grid;justify-items:center;gap:7px;padding:22px 12px;border:1px solid #f0d5e1;color:var(--ink);transition:transform .2s}.gift-card:hover{transform:translateY(-4px) rotate(1deg)}.gift-card>span{font-size:2.2rem}.gift-card small{font-size:.78rem;color:var(--muted)}.gift-message{margin:20px auto 0;max-width:540px;padding:18px;border:1px dashed #df9db8;border-radius:14px;text-align:center;background:#fff0f6;color:var(--deep)}.timer-section{text-align:center}.timer-sub{color:var(--muted);font-size:.85rem}.timer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px auto;max-width:620px}.timer-grid div{padding:18px 8px;background:#fff0f6;border:1px solid #f3d1df;border-radius:14px;display:grid}.timer-grid strong{font-size:clamp(1.5rem,5vw,2.5rem);font-family:'Playfair Display',serif;color:var(--deep);font-variant-numeric:tabular-nums}.timer-grid span{font-size:.78rem;color:var(--muted)}.timer-caption{font-family:Georgia,serif;color:var(--deep)}.footer{text-align:center;padding:24px 0 45px;color:var(--muted);font-size:.85rem}.footer-hearts{font-size:1.5rem;color:var(--rose);letter-spacing:.3em}.text-btn{background:transparent;border:0;color:var(--deep);text-decoration:underline}.gift-dialog{border:0;background:transparent;padding:16px;width:min(100%,440px);max-width:calc(100% - 20px)}.gift-dialog::backdrop{background:#51283d77;backdrop-filter:blur(4px)}.dialog-paper{padding:38px 24px 26px;text-align:center}.dialog-paper p:not(.eyebrow){font-family:Georgia,serif;font-size:1.1rem}.close-btn{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:1.8rem;color:var(--muted)}.dialog-flower{font-size:2.4rem}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.floating-hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}.float-heart{position:absolute;bottom:-30px;color:#e7a0bc88;animation:float-up linear forwards}@keyframes float-up{to{transform:translateY(-110vh) rotate(35deg);opacity:0}}code{background:#ffe7f0;border-radius:5px;padding:2px 5px;color:var(--deep)}@media(max-width:680px){main{width:min(100% - 20px,980px)}.lock-card{padding:34px 20px 24px}.hero{padding:48px 16px 30px}.memory-grid{grid-template-columns:1fr;max-width:360px;margin:auto;gap:18px}.photo-frame{height:300px}.tilt-left,.tilt-right{transform:none}.gift-grid{grid-template-columns:1fr}.gift-card{grid-template-columns:48px 1fr;justify-items:start;text-align:left;padding:15px}.gift-card>span{grid-row:span 2}.timer-grid{gap:6px}.timer-grid div{padding:13px 3px}.timer-grid span{font-size:.68rem}.nav-chips{gap:6px}.nav-chips a{font-size:.78rem;padding:7px 10px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-  АНХААР: GitHub Pages статик сайт тул SECRET_CODE нь жинхэнэ хамгаалалт биш.
-  Код JavaScript дотор харагдаж болох тул хувийн мэдээлэл бүү байрлуулаарай.
-*/
-const SECRET_CODE = "0017";
-const RELATIONSHIP_START = "2026-08-29"; // ӨӨРСДИЙН ЭХЭЛСЭН ӨДРӨӨР СОЛИНО
+/* ===== Болзоонд урих ===== */
+.date-section{max-width:760px;margin-inline:auto}
+.date-sub{color:var(--muted);font-size:.9rem}
+#dateForm{display:grid;gap:18px;margin-top:22px}
+#dateForm fieldset{border:0;padding:0;margin:0}
+.field-label{display:block;margin-bottom:6px;padding:0;font-size:.82rem;font-weight:700;color:var(--deep)}
+.who-row,.date-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.who-opt{position:relative}
+.who-opt input{position:absolute;opacity:0}
+.who-opt span{display:block;padding:12px;text-align:center;border:1px solid #ecc9d8;border-radius:12px;background:#fff9fc;cursor:pointer;transition:background .18s,color .18s}
+.who-opt input:checked+span{background:var(--deep);border-color:var(--deep);color:#fff}
+.who-opt input:focus-visible+span{box-shadow:0 0 0 3px #f5b8d055}
+#dateForm input[type=date],#dateForm input[type=time],#dateForm input[type=text],#dateForm textarea{width:100%;padding:12px 14px;border:1px solid #ecc9d8;border-radius:12px;background:#fff9fc;color:var(--ink);outline:none;font:inherit}
+#dateForm textarea{resize:vertical}
+#dateForm input:focus,#dateForm textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #f5b8d044}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip-pick{padding:8px 13px;border:1px solid #f0ccdb;border-radius:999px;background:#fff9fc;color:var(--deep);font-size:.86rem;transition:background .18s}
+.chip-pick:hover{background:#ffe1ed}
+.chip-pick[aria-pressed=true]{background:#ffe1ed;border-color:var(--rose);font-weight:700}
+.honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.date-status{min-height:1.3em;margin:0;font-size:.88rem;color:var(--deep)}
+.date-status.err{color:#b34367}
+.date-status a{color:var(--deep);font-weight:700}
+.invite-card{margin-top:22px;padding:22px 18px;text-align:center;border:1px dashed #df9db8;border-radius:14px;background:#fff0f6;animation:pop .4s ease}
+.invite-card h3{margin:0 0 12px;font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--deep)}
+.invite-card dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;text-align:left;max-width:420px;margin-inline:auto}
+.invite-card dt{color:var(--muted);font-size:.82rem}
+.invite-card dd{margin:0;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+@media(max-width:420px){.date-row{grid-template-columns:1fr}}
 
-const lockScreen = document.getElementById("lockScreen");
-const siteContent = document.getElementById("siteContent");
-const unlockForm = document.getElementById("unlockForm");
-const secretInput = document.getElementById("secretCode");
-const lockMessage = document.getElementById("lockMessage");
+/* ===== Дурсамж нэмэх ===== */
+.mem-add{max-width:620px;margin:34px auto 26px}
+.mem-title{margin:0 0 4px;font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:1.5rem}
+#memForm{display:grid;gap:18px;margin-top:18px}
+#memForm fieldset{border:0;padding:0;margin:0}
+#memForm input[type=date],#memForm input[type=text],#memForm textarea{width:100%;padding:12px 14px;border:1px solid #ecc9d8;border-radius:12px;background:#fff9fc;color:var(--ink);outline:none;font:inherit}
+#memForm textarea{resize:vertical}
+#memForm input:focus,#memForm textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #f5b8d044}
+#memForm input[type=file]{width:100%;padding:10px;border:1px dashed #df9db8;border-radius:12px;background:#fff9fc;font:inherit;color:var(--muted)}
+.mem-preview{display:block;max-width:180px;max-height:180px;margin-top:10px;border-radius:10px;object-fit:cover}
+.mem-gallery{margin-top:10px}
+.mem-gallery>.small-note{grid-column:1/-1}
+.memory-meta{display:block;margin-top:2px;font-size:.72rem;color:#c18ba2}
 
-unlockForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (secretInput.value.trim() === SECRET_CODE) {
-    lockScreen.classList.add("hidden");
-    siteContent.classList.remove("hidden");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  } else {
-    lockMessage.textContent = "Код таарахгүй байна аа. Дахиад нэг оролдоод үзээрэй ♡";
-    secretInput.value = "";
-    secretInput.focus();
-  }
-});
-
-document.getElementById("letterBtn").addEventListener("click", () => {
-  document.getElementById("letterSecret").classList.toggle("hidden");
-});
-
-const giftDialog = document.getElementById("giftDialog");
-const dialogText = document.getElementById("dialogText");
-document.querySelectorAll(".gift-card").forEach((gift) => {
-  gift.addEventListener("click", () => {
-    dialogText.textContent = gift.dataset.message;
-    if (typeof giftDialog.showModal === "function") giftDialog.showModal();
-    else {
-      document.getElementById("giftMessage").textContent = gift.dataset.message;
-      document.getElementById("giftMessage").classList.remove("hidden");
-    }
-  });
-});
-function closeGiftDialog() {
-  if (giftDialog.open) giftDialog.close();
-}
-document.getElementById("closeDialog").addEventListener("click", closeGiftDialog);
-document.getElementById("dialogOkay").addEventListener("click", closeGiftDialog);
-giftDialog.addEventListener("click", (event) => {
-  if (event.target === giftDialog) closeGiftDialog();
-});
-
-function updateTimer() {
-  // Огноог local time-оор тооцно. Ирээдүйн/буруу огноо бол тайлбар харуулна.
-  const parts = RELATIONSHIP_START.split("-").map(Number);
-  const start = new Date(parts[0], parts[1] - 1, parts[2], 0, 0, 0);
-  const now = new Date();
-  if (!parts.every(Number.isFinite) || Number.isNaN(start.getTime()) || start > now) {
-    ["days", "hours", "minutes", "seconds"].forEach(id => document.getElementById(id).textContent = "—");
-    document.getElementById("timerCaption").textContent = "♡";
-    return;
-  }
-  let total = Math.floor((now - start) / 1000);
-  const days = Math.floor(total / 86400); total %= 86400;
-  const hours = Math.floor(total / 3600); total %= 3600;
-  const minutes = Math.floor(total / 60);
-  const seconds = total % 60;
-  document.getElementById("days").textContent = days.toLocaleString("mn-MN");
-  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-  document.getElementById("timerCaption").textContent = `${days.toLocaleString("mn-MN")} өдөр дундаас бидний түүх үргэлжилсээр… ♡`;
-}
-
-document.getElementById("backToTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-// Арын жижигхэн хөвөх зүрхнүүд
-const heartLayer = document.querySelector(".floating-hearts");
-function addFloatingHeart() {
-  if (document.hidden || heartLayer.childElementCount > 14) return;
-  const heart = document.createElement("span");
-  heart.className = "float-heart";
-  heart.textContent = Math.random() > 0.5 ? "♡" : "✿";
-  heart.style.left = `${Math.random() * 100}%`;
-  heart.style.fontSize = `${12 + Math.random() * 18}px`;
-  heart.style.animationDuration = `${8 + Math.random() * 8}s`;
-  heartLayer.appendChild(heart);
-  setTimeout(() => heart.remove(), 17000);
-}
-setInterval(addFloatingHeart, 1600);
-
-// ===== БОЛЗООНЫ УРИЛГА =====
-// Статик сайт тул имэйлийг FormSubmit.co үйлчилгээгээр дамжуулан илгээнэ.
-// Анх удаа илгээхэд INVITE_EMAIL руу баталгаажуулах имэйл очно — "Activate" дарна.
-const INVITE_EMAIL = "tsevegnyam123@gmail.com";
-const INVITE_CC = "munkhbayraminerdene998@gmail.com";
-const WEEKDAYS = ["Ням", "Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба"];
-
-const dateForm = document.getElementById("dateForm");
-const dateStatus = document.getElementById("dateStatus");
-const dateCard = document.getElementById("dateCard");
-let pickedActivity = "";
-
-// Өнгөрсөн өдөр сонгохоос сэргийлнэ
-(function () {
-  const d = new Date(), p = (n) => String(n).padStart(2, "0");
-  document.getElementById("dateDay").min = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
-})();
-
-function resetChips() {
-  document.querySelectorAll(".chip-pick").forEach((c) => c.setAttribute("aria-pressed", "false"));
-  pickedActivity = "";
-}
-document.querySelectorAll(".chip-pick").forEach((chip) => {
-  chip.addEventListener("click", () => {
-    const wasOn = chip.getAttribute("aria-pressed") === "true";
-    resetChips();
-    if (!wasOn) { chip.setAttribute("aria-pressed", "true"); pickedActivity = chip.dataset.value; }
-  });
-});
-
-function prettyDate(iso) {
-  const [y, m, d] = iso.split("-").map(Number);
-  return `${y} оны ${m}-р сарын ${d}, ${WEEKDAYS[new Date(y, m - 1, d).getDay()]} гараг`;
-}
-
-function setStatus(text, isError) {
-  dateStatus.textContent = text;
-  dateStatus.className = "date-status" + (isError ? " err" : "");
-}
-
-function showInviteCard(details) {
-  dateCard.replaceChildren();
-  const h = document.createElement("h3");
-  h.textContent = "Урилга илгээгдлээ 💌";
-  const dl = document.createElement("dl");
-  Object.entries(details).forEach(([k, v]) => {
-    const dt = document.createElement("dt"); dt.textContent = k;
-    const dd = document.createElement("dd"); dd.textContent = v;
-    dl.append(dt, dd);
-  });
-  dateCard.append(h, dl);
-  dateCard.classList.remove("hidden");
-  dateCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-function showMailtoFallback(details, subject) {
-  const body = Object.entries(details).map(([k, v]) => `${k}: ${v}`).join("\n");
-  const a = document.createElement("a");
-  a.href = `mailto:${INVITE_EMAIL},${INVITE_CC}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  a.textContent = "имэйл апп-аараа илгээх";
-  dateStatus.className = "date-status err";
-  dateStatus.replaceChildren("Автоматаар илгээж чадсангүй. Энд дарж ", a, " ♡");
-}
-
-dateForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const f = new FormData(dateForm);
-  if (f.get("_honey")) return; // спам
-
-  const inviter = f.get("inviter");
-  const day = f.get("day");
-  const time = f.get("time");
-  const place = (f.get("place") || "").trim();
-  const note = (f.get("note") || "").trim();
-
-  if (!inviter || !day || !time || !place) {
-    setStatus("Хэн урьж байгаа, өдөр, цаг, байршлаа бүгдийг нь сонгоорой ♡", true);
-    return;
-  }
-
-  const details = {
-    "Урьсан хүн": inviter,
-    "Өдөр": prettyDate(day),
-    "Цаг": time,
-    "Байршил": place,
-    "Юу хийх вэ": pickedActivity || "—",
-    "Нэмэлт үг": note || "—"
-  };
-  const subject = `💌 Болзооны урилга — ${inviter}`;
-  const btn = dateForm.querySelector("button[type=submit]");
-  btn.disabled = true;
-  setStatus("Илгээж байна… ♡", false);
-
-  try {
-    await sendInvite(details, subject);
-    setStatus("Урилга хоёр имэйл рүү очлоо ♡", false);
-    showInviteCard(details);
-    dateForm.reset();
-    resetChips();
-  } catch (err) {
-    showMailtoFallback(details, subject);
-  } finally {
-    btn.disabled = false;
-  }
-});
-
-// ===== УРИЛГЫН ИМЭЙЛ ИЛГЭЭХ =====
-// Загварлаг имэйл: emailjs.com дээр email-template.html-ийг ашиглаад доорх 3 утгыг бөглө.
-// Хоосон бол FormSubmit-ийн "box" загвараар илгээнэ.
-const EMAILJS = { publicKey: "EEID1NFS4C4LGqqhN", serviceId: "service_wx4ocfg", templateId: "template_546gw5f" };
-
-async function sendInvite(details, subject) {
-  if (EMAILJS.publicKey && EMAILJS.serviceId && EMAILJS.templateId) {
-    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        service_id: EMAILJS.serviceId,
-        template_id: EMAILJS.templateId,
-        user_id: EMAILJS.publicKey,
-        template_params: {
-          to_email: INVITE_EMAIL, cc_email: INVITE_CC, subject,
-          inviter: details["Урьсан хүн"], date: details["Өдөр"], time: details["Цаг"],
-          place: details["Байршил"], activity: details["Юу хийх вэ"], note: details["Нэмэлт үг"]
-        }
-      })
-    });
-    if (!res.ok) throw new Error("emailjs failed");
-    return;
-  }
-  const res = await fetch(`https://formsubmit.co/ajax/${INVITE_EMAIL}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Accept": "application/json" },
-    body: JSON.stringify({ ...details, _subject: subject, _cc: INVITE_CC, _template: "box", _captcha: "false" })
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data.success === false || data.success === "false") throw new Error("send failed");
-}
-
-// ===== ДУРСАМЖИЙН ГАЛЕРЕЙ (Supabase) =====
-// setup-supabase.sql-ийг нэг удаа ажиллуулаад доорх хоёр утгыг бөглө.
-const SUPABASE_URL = "https://zadffjbhqikogrulpywn.supabase.co";  // жишээ: https://abcd1234.supabase.co
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZGZmamJocWlrb2dydWxweXduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMzQ5MDUsImV4cCI6MjEwODgxMDkwNX0.trCttvFZPwFHEPghWxMZip6Xa2ipFkTGYcLLeLytjsc";  // Project Settings → API → anon public key
-
-const memForm = document.getElementById("memForm");
-const memFile = document.getElementById("memFile");
-const memPreview = document.getElementById("memPreview");
-const memStatus = document.getElementById("memStatus");
-const memGallery = document.getElementById("memGallery");
-const sbReady = () => Boolean(SUPABASE_URL && SUPABASE_KEY);
-const sb = (path, opts = {}) => fetch(SUPABASE_URL + path, {
-  ...opts,
-  headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, ...(opts.headers || {}) }
-});
-
-(function () {
-  const d = new Date(), p = (n) => String(n).padStart(2, "0");
-  document.getElementById("memDay").max = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
-})();
-
-function setMem(text, isError) {
-  memStatus.textContent = text;
-  memStatus.className = "date-status" + (isError ? " err" : "");
-}
-
-function galleryNote(text) {
-  const p = document.createElement("p");
-  p.className = "small-note";
-  p.textContent = text;
-  memGallery.replaceChildren(p);
-}
-
-memFile.addEventListener("change", () => {
-  const f = memFile.files[0];
-  if (!f) { memPreview.hidden = true; return; }
-  memPreview.src = URL.createObjectURL(f);
-  memPreview.hidden = false;
-});
-
-// Утасны том зургийг жижигрүүлж (1600px) илгээнэ
-async function resizeImage(file, max = 1600) {
-  const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
-  const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
-  const c = document.createElement("canvas");
-  c.width = Math.round(bmp.width * k);
-  c.height = Math.round(bmp.height * k);
-  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
-  return new Promise((resolve) => c.toBlob(resolve, "image/jpeg", 0.82));
-}
-
-function memCard(m, i) {
-  const art = document.createElement("article");
-  art.className = `memory-card paper ${i % 2 ? "tilt-right" : "tilt-left"}`;
-  const frame = document.createElement("div");
-  frame.className = "photo-frame";
-  const img = document.createElement("img");
-  img.src = `${SUPABASE_URL}/storage/v1/object/public/memories/${m.image_path}`;
-  img.alt = m.caption || "Дурсамж";
-  img.loading = "lazy";
-  frame.append(img);
-  const cap = document.createElement("p");
-  cap.className = "memory-caption";
-  cap.textContent = `“${m.caption || ""}”`;
-  const label = document.createElement("span");
-  label.className = "date-label";
-  label.textContent = [m.taken_on ? prettyDate(m.taken_on) : "", m.place].filter(Boolean).join(" · ");
-  const meta = document.createElement("span");
-  meta.className = "memory-meta";
-  meta.textContent = m.author ? `${m.author} нэмсэн ♡` : "";
-  art.append(frame, cap, label, meta);
-  return art;
-}
-
-async function loadMemories() {
-  if (!sbReady()) { galleryNote("Галерей тохируулагдаагүй байна (script.js дотор SUPABASE_URL, SUPABASE_KEY бөглөнө)."); return; }
-  try {
-    const res = await sb("/rest/v1/memories?select=*&order=taken_on.desc.nullslast,created_at.desc");
-    if (!res.ok) throw new Error("load");
-    const rows = await res.json();
-    if (!rows.length) { galleryNote("Анхны дурсамжаа дээрх хэсгээс нэмээрэй ♡"); return; }
-    memGallery.replaceChildren(...rows.map(memCard));
-  } catch (err) {
-    galleryNote("Дурсамжийг ачаалж чадсангүй.");
-  }
-}
-
-memForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  if (!sbReady()) { setMem("Эхлээд Supabase тохиргоогоо хийнэ үү (script.js).", true); return; }
-  const f = new FormData(memForm), file = memFile.files[0];
-  const who = f.get("who"), day = f.get("day");
-  const place = (f.get("place") || "").trim(), text = (f.get("text") || "").trim();
-  if (!file || !who || !day || !place || !text) {
-    setMem("Зураг, өдөр, газар, юу болсон, хэн нэмж байгаагаа бөглөөрэй ♡", true);
-    return;
-  }
-  const btn = memForm.querySelector("button[type=submit]");
-  btn.disabled = true;
-  setMem("Зургийг илгээж байна… ♡", false);
-  try {
-    const blob = await resizeImage(file);
-    const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
-    let r = await sb(`/storage/v1/object/memories/${path}`, { method: "POST", headers: { "Content-Type": "image/jpeg" }, body: blob });
-    if (!r.ok) throw new Error("upload");
-    r = await sb("/rest/v1/memories", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ taken_on: day, place, caption: text, author: who, image_path: path })
-    });
-    if (!r.ok) throw new Error("insert");
-    memForm.reset();
-    memPreview.hidden = true;
-    setMem("Дурсамж нэмэгдлээ ♡", false);
-    await loadMemories();
-  } catch (err) {
-    setMem("Илгээж чадсангүй. Тохиргоо болон интернэтээ шалгаад дахин оролдоорой.", true);
-  } finally {
-    btn.disabled = false;
-  }
-});
-
-loadMemories();
+/* ===== Шинэ хэсгүүд ===== */
+.center-section{text-align:center}
+.story-section{max-width:760px;margin-inline:auto}
+.timeline{position:relative;margin:28px auto 8px;max-width:620px;padding-left:26px;border-left:2px solid #f2c7d8;display:grid;gap:22px;text-align:left}
+.tl-item{position:relative}
+.tl-item::before{content:"";position:absolute;left:-34px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--rose);border:3px solid #fffdfb}
+.tl-date{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#c18ba2}
+.tl-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;color:var(--deep)}
+.tl-detail{margin:2px 0;font-size:.93rem}
+.tl-meta{font-size:.72rem;color:var(--muted)}
+.mini-form{display:grid;gap:10px;margin:16px auto}
+.story-section .mini-form{max-width:620px;padding-top:18px;border-top:1px dashed #f0ccdb}
+.mini-form .field-label{margin:0;font-weight:600}
+.mini-form input[type=text],.mini-form input[type=date],.mini-form textarea{display:block;width:100%;margin-top:4px;padding:11px 13px;border:1px solid #ecc9d8;border-radius:12px;background:#fff9fc;color:var(--ink);outline:none;font:inherit;font-weight:400}
+.mini-form input:focus,.mini-form textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #f5b8d044}
+.reason-box{margin:22px auto;max-width:520px;padding:22px 18px;background:#fff0f6;border:1px dashed #df9db8;border-radius:14px;min-height:96px;display:grid;place-content:center;gap:6px}
+.reason-box p{margin:0;font-family:Georgia,serif;font-size:1.1rem;color:var(--deep)}
+.reason-box small{color:var(--muted)}
+.special-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 auto 24px;max-width:620px}
+.special-grid div{display:grid;gap:2px;padding:14px 10px;background:#fff0f6;border:1px solid #f3d1df;border-radius:14px}
+.special-grid strong{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--deep)}
+.special-grid span{font-size:.78rem;color:var(--muted)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.list-card h3{margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--deep)}
+.todo-list{display:grid;gap:8px}
+.todo-item{padding:10px 12px;background:#fff9fc;border:1px solid #f0d5e1;border-radius:12px}
+.todo-main{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.todo-main input{margin-top:5px;accent-color:var(--deep)}
+.todo-text{display:grid}
+.todo-text small{color:var(--muted);font-size:.78rem}
+.todo-by{font-size:.7rem!important}
+.todo-item.done .todo-text b{text-decoration:line-through;opacity:.6}
+.todo-photo{display:inline-block;margin-top:8px;font-size:.8rem;color:var(--deep);text-decoration:underline;cursor:pointer}
+.todo-thumb{display:block;width:100%;max-height:170px;margin-top:8px;border-radius:10px;object-fit:cover}
+.mood-who{max-width:320px;margin:16px auto}
+.mood-pick{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:12px 0}
+.mood-btn{padding:8px 12px;font-size:1.7rem;line-height:1.2;border:1px solid #f0ccdb;border-radius:14px;background:#fff9fc;transition:transform .15s,background .15s}
+.mood-btn:hover{background:#ffe1ed;transform:scale(1.1)}
+.mood-today{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:420px;margin:14px auto}
+.mood-card{display:grid;gap:2px;padding:14px;background:#fff0f6;border:1px solid #f3d1df;border-radius:14px}
+.mood-face{font-size:2.2rem}
+.mood-card small{color:var(--muted)}
+.mood-history{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+.mood-chip{padding:4px 10px;font-size:.78rem;color:var(--muted);background:#fff9fc;border:1px solid #f0d5e1;border-radius:999px}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
