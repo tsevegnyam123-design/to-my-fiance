@@ -204,7 +204,7 @@ dateForm.addEventListener("submit", async (event) => {
 // ===== УРИЛГЫН ИМЭЙЛ ИЛГЭЭХ =====
 // Загварлаг имэйл: emailjs.com дээр email-template.html-ийг ашиглаад доорх 3 утгыг бөглө.
 // Хоосон бол FormSubmit-ийн "box" загвараар илгээнэ.
-const EMAILJS = { publicKey: "", serviceId: "", templateId: "" };
+const EMAILJS = { publicKey: "EEID1NFS4C4LGqqhN", serviceId: "service_wx4ocfg", templateId: "template_546gw5f" };
 
 async function sendInvite(details, subject) {
   if (EMAILJS.publicKey && EMAILJS.serviceId && EMAILJS.templateId) {
@@ -236,8 +236,8 @@ async function sendInvite(details, subject) {
 
 // ===== ДУРСАМЖИЙН ГАЛЕРЕЙ (Supabase) =====
 // setup-supabase.sql-ийг нэг удаа ажиллуулаад доорх хоёр утгыг бөглө.
-const SUPABASE_URL = "";  // жишээ: https://abcd1234.supabase.co
-const SUPABASE_KEY = "";  // Project Settings → API → anon public key
+const SUPABASE_URL = "https://zadffjbhqikogrulpywn.supabase.co";  // жишээ: https://abcd1234.supabase.co
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphZGZmamJocWlrb2dydWxweXduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMzQ5MDUsImV4cCI6MjEwODgxMDkwNX0.trCttvFZPwFHEPghWxMZip6Xa2ipFkTGYcLLeLytjsc";  // Project Settings → API → anon public key
 
 const memForm = document.getElementById("memForm");
 const memFile = document.getElementById("memFile");
